@@ -1,5 +1,6 @@
 <?php
 class Publicacion{
+  private $id;
   private $titulo;
   private $imagen;
   private $contenido;
@@ -17,6 +18,7 @@ class Publicacion{
 
 public function __construct1($json) {
   $arr = json_decode($json);
+  $this->titulo=$arr->id;
   $this->titulo=$arr->titulo;
   $this->imagen=$arr->imagen;
   $this->contenido=$arr->contenido;
@@ -24,7 +26,8 @@ public function __construct1($json) {
   $this->fvencimiento=$arr->fvencimiento;
   
 }
-  public function __construct5($titulo = '',$imagen = ['',''],$contenido = '',$fpublicacion,$fvencimiento){
+  public function __construct6($id='',$titulo = '',$imagen = ['',''],$contenido = '',$fpublicacion,$fvencimiento){
+    $this->id=$id;
     $this->titulo=$titulo;
     $this->imagen=$imagen;
     $this->contenido=$contenido;
@@ -49,6 +52,9 @@ public function __construct1($json) {
   }
 
   /** Getters */
+  public function getid(){
+    return $this->id;
+  }
   public function gettitulo(){
     return $this->titulo;
   }
