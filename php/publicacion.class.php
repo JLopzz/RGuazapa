@@ -4,35 +4,44 @@ class Publicacion{
   private $titulo;
   private $imagen;
   private $contenido;
-  private $fpublicacion;
-  private $fvencimiento;
+  private $fecha;
+  private $resumen;
 
   public function __construct() {
     $get_arguments       = func_get_args();
     $number_of_arguments = func_num_args();
+    if (method_exists($this, $method_name = '__construct'.$number_of_arguments))
+      call_user_func_array(array($this, $method_name), $get_arguments);
+}
 
-    if (method_exists($this, $method_name = '__construct'.$number_of_arguments)) {
-        call_user_func_array(array($this, $method_name), $get_arguments);
-    }
+public function __construct0() {
+  $this->id='0';
+  $this->titulo='Sin Publicaciones';
+  $this->imagen=['',''];
+  $this->contenido='';
+  $this->fecha='';
+  $this->resumen='';
+  return true;
 }
 
 public function __construct1($json) {
   $arr = json_decode($json);
-  $this->titulo=$arr->id;
+  $this->id=$arr->id;
   $this->titulo=$arr->titulo;
   $this->imagen=$arr->imagen;
   $this->contenido=$arr->contenido;
-  $this->fpublicacion=$arr->fpublicacion;
-  $this->fvencimiento=$arr->fvencimiento;
-  
+  $this->fecha=$arr->fecha;
+  $this->resumen=$arr->resumen;
+  return true;
 }
-  public function __construct6($id='',$titulo = '',$imagen = ['',''],$contenido = '',$fpublicacion,$fvencimiento){
+  public function __construct6($id='',$titulo = '',$imagen = ['',''],$fecha,$contenido = '',$resumen=''){
     $this->id=$id;
     $this->titulo=$titulo;
     $this->imagen=$imagen;
     $this->contenido=$contenido;
-    $this->fpublicacion=$fpublicacion;
-    $this->fvencimiento=$fvencimiento;
+    $this->fecha=$fecha;
+    $this->resumen=$resumen;
+    return true;
   }
   /** Setters */
   public function settitulo($titulo){
@@ -44,11 +53,11 @@ public function __construct1($json) {
   public function setcontenido($contenido){
     $this->contenido = $contenido;
   }
-  public function setfpublicacion($fpublicacion){
-    $this->fpublicacion = $fpublicacion;
+  public function setfecha($fecha){
+    $this->fecha = $fecha;
   }
-  public function setfvencimiento($fvencimiento){
-    $this->fvencimiento = $fvencimiento;
+  public function setresumen($resumen){
+    $this->resumen = $resumen;
   }
 
   /** Getters */
@@ -64,11 +73,11 @@ public function __construct1($json) {
   public function getcontenido(){
     return $this->contenido;
   }
-  public function getfpublicacion(){
-    return $this->fpublicacion;
+  public function getfecha(){
+    return $this->fecha;
   }
-  public function getfvencimiento(){
-    return $this->fvencimiento;
+  public function getresumen(){
+    return $this->resumen;
   }
   
   /**Conversion en varios formatos */

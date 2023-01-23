@@ -6,9 +6,9 @@
       "img1": "img1.jpg",
       "img2": "img1.jpg"
     },
+    "fecha":"08-12-2022",
     "contenido": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "fpublicacion": "2022-11-10",
-    "fvencimiento": "2022-12-10"
+    "resumen": "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
   },
   {
     "id": 1231232,
@@ -17,8 +17,8 @@
       "img1": "img2.jpg",
       "img2": "img2.jpg"
     },
+    "fecha":"08-11-2022",
     "contenido": "To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
-    "fpublicacion": "2022-10-08",
-    "fvencimiento": "2022-12-08"
+    "resumen": "undertakes laborious physical exercise, except to obtain some advantage from it?"
   }
 ]
