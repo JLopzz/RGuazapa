@@ -11,6 +11,8 @@ function setFormValues( id ){
       if(info.imagen[1]!= '**No Imagen**') document.getElementById("previewImg2Edit").src = 'db/img/'+info.imagen[1]
       document.getElementById("resumenEdit").value = info.resumen
       document.getElementById("contenidoEdit").value = info.contenido
+      document.getElementById("autorEdit").value = info.autor
+      document.getElementById("ytURLEdit").value = info.ytURL
       document.getElementById("pubEdit").value = info.id
     })
 }
@@ -37,6 +39,7 @@ function validateSubmitTxt(id){
       /*pubTitle = */document.getElementById("pubTitle"+id).value != "" &&
       /*resumen = */document.getElementById("resumen"+id).value != "" &&
       /*contenido = */document.getElementById("contenido"+id).value != "" &&
+      /*autor = */document.getElementById("autor"+id).value != "" &&
       validImg
       // /*previewImg1 = */document.getElementById("image1"+id).value != undefined )
       // /*previewImg2 = */document.getElementById("previewImg2"+id).value == undefined

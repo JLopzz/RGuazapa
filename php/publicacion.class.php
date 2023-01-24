@@ -6,6 +6,8 @@ class Publicacion{
   private $contenido;
   private $fecha;
   private $resumen;
+  private $autor;
+  private $ytURL;
 
   public function __construct() {
     $get_arguments       = func_get_args();
@@ -32,15 +34,19 @@ public function __construct1($json) {
   $this->contenido=$arr->contenido;
   $this->fecha=$arr->fecha;
   $this->resumen=$arr->resumen;
+  $this->autor=$arr->autor;
+  $this->ytURL=$arr->ytURL;
   return true;
 }
-  public function __construct6($id='',$titulo = '',$imagen = ['',''],$fecha,$contenido = '',$resumen=''){
+  public function __construct8($id='',$titulo = '',$imagen = ['',''],$fecha,$contenido = '',$resumen='',$autor='',$ytURL){
     $this->id=$id;
     $this->titulo=$titulo;
     $this->imagen=$imagen;
     $this->contenido=$contenido;
     $this->fecha=$fecha;
     $this->resumen=$resumen;
+    $this->autor=$autor;
+    $this->ytURL=$ytURL;
     return true;
   }
   /** Setters */
@@ -58,6 +64,12 @@ public function __construct1($json) {
   }
   public function setresumen($resumen){
     $this->resumen = $resumen;
+  }
+  public function setautor($autor){
+    $this->autor = $autor;
+  }
+  public function setytURL($ytURL){
+    $this->ytURL = $ytURL;
   }
 
   /** Getters */
@@ -78,6 +90,12 @@ public function __construct1($json) {
   }
   public function getresumen(){
     return $this->resumen;
+  }
+  public function getautor(){
+    return $this->autor;
+  }
+  public function getytURL(){
+    return $this->ytURL;
   }
   
   /**Conversion en varios formatos */

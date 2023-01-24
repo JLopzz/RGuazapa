@@ -61,7 +61,15 @@ if(isset($_POST['New'])){
   $newImg2 = $_FILES["image2New"]['name'] != "" ?
     uploadImg($_FILES["image2New"],'2-'.$newPubId) :
     '**No Imagen**';
-  if($pub = new Publicacion($newPubId,$_POST['pubTitleNew'],[$newImg1,$newImg2],date('d/m/Y'),$_POST['contenidoNew'],$_POST['resumenNew'])){
+  if($pub = new Publicacion(
+      $newPubId,
+      $_POST['pubTitleNew'],
+      [$newImg1,$newImg2],
+      date('d/m/Y'),
+      $_POST['contenidoNew'],
+      $_POST['resumenNew'],
+      $_POST['autorNew'],
+      $_POST['ytURLNew'])){
     if( isset($pubs[0]) ) unset($pubs[0]);
     // array_push($pubs,$pub);
     $pubs[$newPubId] = $pub;
@@ -85,6 +93,10 @@ else if(isset($_POST['Edit'])){
     $pub->setresumen($_POST["resumenEdit"]);
   if($pub->getcontenido() != $_POST["contenidoEdit"])
     $pub->setcontenido($_POST["contenidoEdit"]);
+  if($pub->getcontenido() != $_POST["autorEdit"])
+    $pub->setcontenido($_POST["autorEdit"]);
+  if($pub->getcontenido() != $_POST["ytURLEdit"])
+    $pub->setcontenido($_POST["ytURLEdit"]);
   $imgE1 = $pub->getimagen()[0];
   $imgE2 = $pub->getimagen()[1];
   if($_FILES["image1Edit"]["name"] != "")
@@ -187,6 +199,7 @@ $nRow = 1;
           else{
             echo "<form action=\".\" method=\"POST\"><button type=\"button\" class=\"btn btn-primary\" data-bs-toggle='modal' data-bs-target='#editModal' onclick='setFormValues(\"{$i->getid()}\");'><i class=\"bi bi-pencil-square\"></i></button>"; 
             echo '<button type="submit" class="btn btn-bary " id="Del" name="Del" value="'.$i->getid().'"><i class="bi bi-trash3" ></i></button> </form>'; 
+            echo '<a href="http://localhost/git/RGuazapa/publicacion.php?id='.$i->getid().'" class="btn btn-primary"><i class="bi bi-eye-fill"></i></a>';
           }
           ?>
           
@@ -209,6 +222,10 @@ $nRow = 1;
             <label for="pubTitleEdit" class="form-label">Titulo de Publicación</label>
             <input type="text" class="form-control" id="pubTitleEdit" name="pubTitleEdit" onchange="validateSubmitTxt('Edit')">
           </div>
+          <div class="col-12">
+            <label for="autorEdit" class="form-label">Autor de Publicación</label>
+            <input type="text" class="form-control" id="autorEdit" name="autorEdit" onchange="validateSubmitTxt('Edit')">
+          </div>
           <div class="col-md-6">
             <label for="image1Edit" class="form-label">Imagen principal</label>
             <input type="file" class="form-control" id="image1Edit" name="image1Edit" accept="image/*" onchange="previewImg(event,'previewImg1Edit')" onblur="validateSubmitTxt('Edit')">
@@ -230,6 +247,10 @@ $nRow = 1;
               <img src="" id="previewImg2Edit" name="previewImg2Edit" alt="" class="img-fluid">
             </div>
             <hr>
+          </div>
+          <div class="col-12">
+            <label for="ytURLEdit" class="form-label">Enlace de video en YouTube</label>
+            <input type="text" class="form-control" id="ytURLEdit" name="ytURLEdit" onchange="validateSubmitTxt('Edit')">
           </div>
           <div class="col-12">
             <label for="resumenEdit" class="form-label">Resumen</label>
@@ -265,6 +286,10 @@ $nRow = 1;
             <label for="pubTitleNew" class="form-label">Titulo de Publicación</label>
             <input type="text" class="form-control" id="pubTitleNew" name="pubTitleNew" onchange="validateSubmitTxt('New')">
           </div>
+          <div class="col-12">
+            <label for="autorNew" class="form-label">Autor de Publicación</label>
+            <input type="text" class="form-control" id="autorNew" name="autorNew" onchange="validateSubmitTxt('New')">
+          </div>
           <div class="col-md-6">
             <label for="image1New" class="form-label">Imagen principal</label>
             <input type="file" class="form-control" id="image1New" name="image1New" accept="image/*" onchange="previewImg(event,'previewImg1New')">
@@ -286,6 +311,10 @@ $nRow = 1;
               <img src="" id="previewImg2New" name="previewImg2New" alt="" class="img-fluid">
             </div>
             <hr>
+          </div>
+          <div class="col-12">
+            <label for="ytURLNew" class="form-label">Enlace de video en YouTube</label>
+            <input type="text" class="form-control" id="ytURLNew" name="ytURLNew" onchange="validateSubmitTxt('New')">
           </div>
           <div class="col-12">
             <label for="resumenNew" class="form-label">Resumen</label>
