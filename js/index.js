@@ -1,5 +1,19 @@
 var validImg = false;
 
+document.addEventListener("DOMContentLoaded", e => {
+  let time = new Date().getHours();
+  let radio = document.getElementById("radio");
+  let player = document.getElementById("rbcloud_player19724");
+  if( time > 4 && time < 21 ){
+    radio.className = "d-block";
+    player.className = "d-none";
+  }
+  else {
+    player.className = "d-block";
+    radio.className = "d-none";
+  }
+})
+
 function setFormValues( id ){
   fetch('./db/json/test.json')
   // fetch('./db/json/newfile.json')

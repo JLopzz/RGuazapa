@@ -48,10 +48,10 @@
                     <!-- RD Navbar Toggle-->
                     
                     <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
-                    <!-- <audio class="d-xl-none mx-2" controls preload src="http://aler.org:8000/radioGuazapa#.ogg"></audio> -->
-
+                    
                     <div class="position-relative d-xl-none mx-2">
-                      <div id='rbcloud_mplayer2696' class=""></div>
+                      <audio id="radiom" controls preload src="http://aler.org:8000/radioGuazapa#.ogg"></audio>
+                      <div id='rbcloud_mplayer2696'></div>
                       <script src='https://c19.radioboss.fm/w/mplayer.js?u=https%3A%2F%2Fc19.radioboss.fm%3A18090%2Fstream&amp;wid=2696&amp;pw=82&amp;ca=%23111111&amp;cg=%23b3b3b3'></script>  
                       <span class="position-absolute end-0 start-0 translate-middle badge rounded-pill bg-danger">
                         Pruebame
@@ -69,8 +69,8 @@
                   </div>
                   <div class="rd-navbar-main-element ">
                     <div class="rd-navbar-nav-wrap">
-                      <img src="images/rguazapa.png" alt="Radio Guazapa" class="rd-navbar-brand d-xl-none mx-2" width="200" height="200">
-                      <img src="images/rguazapa.png" alt="Radio Guazapa" class="rd-navbar-brand  mx-5 d-none d-xl-block" width="100" height="100">
+                      <a class="navbar-brand d-xl-none mx-2 "><img src="images/rguazapa.png" alt="Radio Guazapa" width="200" height="200"></a>
+                      <a class="navbar-brand mx-5 d-none d-xl-block left-align"><img src="images/rguazapa.png" alt="Radio Guazapa" width="100" height="100"></a>
                       <ul class="rd-navbar-nav">
                         <li class="rd-nav-item active"><a class="rd-nav-link" href="#home">Inicio</a></li>
                         <li class="rd-nav-item"><a class="rd-nav-link" href="#services">Nosotros</a></li>
@@ -80,8 +80,8 @@
                         <!-- <li class="rd-nav-item"><a class="rd-nav-link" href="http://localhost/git/RGuazapa">Noticias</a></li> -->
                       </ul>
                       
-                      <!-- <audio class="mx-5 d-none d-xl-block" controls preload src="http://aler.org:8000/radioGuazapa#.ogg"></audio> -->
                       <div class="position-relative mx-5 d-none d-xl-block">
+                        <audio id="radio" controls preload src="http://aler.org:8000/radioGuazapa#.ogg"></audio>
                         <div id='rbcloud_player19724'></div>
                         <script src='https://c19.radioboss.fm/w/player.js?u=https%3A%2F%2Fc19.radioboss.fm%3A18090%2Fstream&amp;wid=19724'></script>
                         <span class="position-absolute end-0 start-0 translate-middle badge rounded-pill bg-danger">
@@ -530,6 +530,25 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-93352905-1"></script>
     <script>
+      document.addEventListener("DOMContentLoaded", e => {
+        let time = new Date().getHours();
+        let radiom = document.getElementById("radiom");
+        let radio = document.getElementById("radio");
+        let playerm = document.getElementById("rbcloud_mplayer2696");
+        let player = document.getElementById("rbcloud_player19724");
+        if( time > 4 && time < 21 ){
+          radiom.className = "d-block";
+          radio.className = "d-block";
+          playerm.className = "d-none";
+          player.className = "d-none";
+        }
+        else {
+          playerm.className = "d-block";
+          player.className = "d-block";
+          radiom.className = "d-none";
+          radio.className = "d-none";
+        }
+      })
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
