@@ -3,14 +3,20 @@ var validImg = false;
 document.addEventListener("DOMContentLoaded", e => {
   let time = new Date().getHours();
   let radio = document.getElementById("radio");
-  let player = document.getElementById("rbcloud_player19724");
+  let player = document.getElementById("radionocturna");
+  let radiom = document.getElementById("radiom");
+  let playerm = document.getElementById("radionocturnam");
   if( time > 4 && time < 21 ){
     radio.className = "d-block";
+    radiom.className = "d-block";
     player.className = "d-none";
+    playerm.className = "d-none";
   }
   else {
     player.className = "d-block";
+    playerm.className = "d-block";
     radio.className = "d-none";
+    radiom.className = "d-none";
   }
 })
 

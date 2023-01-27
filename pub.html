@@ -5,13 +5,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>#Investigación| La angustia de no saber dónde están sus hijos</title>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
   <script src="js/index.js"></script>
 </head>
 <body>
-  <nav class="navbar sticky-top navbar-expand-lg bg-primary">
+  <nav class="navbar sticky-top navbar-expand-lg bg-body">
     <div class="container">
       <a class="navbar-brand d-none d-lg-block">
         <img src="paginaWeb/images/rguazapa.png" alt="Radio Guazapa" width="125" class="my-1">
@@ -19,6 +20,15 @@
       <a class="navbar-brand d-lg-none">
         <img src="paginaWeb/images/rguazapa.png" alt="Radio Guazapa" width="50" class="my-3">
       </a>
+      <div class="position-relative d-lg-none">
+        <audio id="radiom" controls preload src="http://aler.org:8000/radioGuazapa#.ogg"></audio>
+        <div id="radionocturnam">
+          <div id='rbcloud_mplayer2696'></div>
+          <span class="position-absolute end-0 start-0 translate-middle badge rounded-pill bg-danger">
+            Pruebame
+          </span>
+        </div>
+      </div>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -32,19 +42,20 @@
           <a class="nav-link active fs-5" href="#"><u>Noticias</u></a>
         </div>
       </div>
-      <div class="position-relative mx-5 d-none d-xl-block">
+      <div class="position-relative d-none d-lg-block ms-5">
         <audio id="radio" controls preload src="http://aler.org:8000/radioGuazapa#.ogg"></audio>
-        <div id='rbcloud_player19724'></div>
-        <script src='https://c19.radioboss.fm/w/player.js?u=https%3A%2F%2Fc19.radioboss.fm%3A18090%2Fstream&amp;wid=19724'></script>
-        <span class="position-absolute end-0 start-0 translate-middle badge rounded-pill bg-danger">
-          Pruebame
-        </span>
+        <div id="radionocturna">
+          <div id='rbcloud_player19724'></div>
+          <span class="position-absolute end-0 start-0 translate-middle badge rounded-pill bg-danger">
+            Pruebame
+          </span>
+        </div>
       </div>
     </div>
   </nav>
   <div class="row">
-    <div class="offset-2 col-8">
-      <img class="my-3" src="./db/img/1-1674538428.jpg" alt="1-1674538428">
+    <div class="offset-2 col-8 my-5">
+      <img class="img-fluid" src="./db/img/1-1674538428.jpg" alt="1-1674538428">
     </div>
     <div class="offset-2 col-8">
       <h1 class="display-5 my-2">#Investigación| La angustia de no saber dónde están sus hijos</h1>
@@ -55,11 +66,43 @@
       <p class="lh-lg">Como en otras crisis, la que se vive en actual contexto con las masivas detenciones, tiene rostro de mujer. Ellas son las que llevan sobre sus hombros la responsabilidad de la familia y de buscar a sus parientes detenidos.</p>
       <p class="lh-lg">En esta investigación de Edilberto Escobar, corresponsal de Radio Victoria y de la Red Informativa de ARPAS, presentamos los casos de tres madres de Cabañas quienes exigen saber ¿dónde están sus hijos?</p>
     </div>
-    <div class="offset-2 col-8">
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/w_99k7bttzw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <div class="offset-3 col-6">
+      <div class="ratio ratio-16x9">
+        <iframe src="https://www.youtube.com/embed/w_99k7bttzw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="offset-1 col-10">
+      <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top bg-secondary bg-gradient">
+          <div class="col-md-4 d-flex align-items-center">
+            <a href="https://radioguazapa.org" class="mb-3 mb-md-0 ms-3 me-2 text-white lh-1 text-decoration-none">
+              Radio Guazapa
+            </a>
+            <span class="mb-3 mb-md-0 text-white">&copy; 2023</span>
+          </div>
+      
+          <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3"><a class="text-white" href="#https://www.facebook.com/radioguazapa" target="_blank">
+              <i class="bi bi-facebook"></i>
+            </a></li>
+            <li class="ms-3"><a class="text-white" href="https://twitter.com/radioguazapa" target="_blank">
+              <i class="bi bi-twitter"></i>
+            </a></li>
+            <li class="ms-3"><a class="text-white" href="https://wa.me/50373624088" target="_blank">
+              <i class="bi bi-whatsapp"></i>
+            </a></li>
+            <li class="mx-3"><a class="text-white" href="https://www.instagram.com/radioguazapa" target="_blank">
+              <i class="bi bi-instagram"></i>
+            </a></li>
+          </ul>
+        </footer>
+      </div>
     </div>
   </div>
-
   
+  
+
+  <script src='https://c19.radioboss.fm/w/player.js?u=https%3A%2F%2Fc19.radioboss.fm%3A18090%2Fstream&amp;wid=19724'></script>
+  <script src='https://c19.radioboss.fm/w/mplayer.js?u=https%3A%2F%2Fc19.radioboss.fm%3A18090%2Fstream&amp;wid=2696&amp;pw=82&amp;ca=%23111111&amp;cg=%23b3b3b3'></script>
 </body>
 </html>
