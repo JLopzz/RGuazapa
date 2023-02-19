@@ -1,20 +1,16 @@
 <?php
-require "php/publicacion.class.php";
+require "res/php/publicacion.class.php";
 
 $id = $_GET["id"];
-CONST jsonDir = 'db/json/';
 $pubs = [];
-
-$dir = jsonDir.'test.json';
-if(filesize($dir)==0){
+if(filesize(jsonDir)==0){
   $pubs[0]=new Publicacion();
 }
 else{
-  $myfile = fopen($dir, "r") or die("Unable to open file!");
-  $readedFile = fread($myfile,filesize($dir));
+  $myfile = fopen(jsonDir, "r") or die("Unable to open file!");
+  $readedFile = fread($myfile,filesize(jsonDir));
   fclose($myfile);
   $json =  json_decode($readedFile);
-
   foreach ($json as $k => $i) {
     $pubs[$k] = new Publicacion($i);
   }
@@ -34,13 +30,14 @@ $actualPub = $pubs[$id];
   <title>
     <?php echo $actualPub->gettitulo(); ?>
   </title>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-  <script src="js/index.js"></script>
+  <script src="res/js/index.js"></script>
 </head>
 <body>
-  <nav class="navbar sticky-top navbar-expand-lg bg-body">
+  <nav class="navbar sticky-top navbar-expand-lg bg-body shadow">
     <div class="container">
       <a class="navbar-brand d-none d-lg-block">
         <img src="paginaWeb/images/rguazapa.png" alt="Radio Guazapa" width="125" class="my-1">
@@ -67,7 +64,7 @@ $actualPub = $pubs[$id];
           <a class="nav-link fs-5" href="paginaWeb/index.html#projects" target="_blank">Programación</a>
           <a class="nav-link fs-5" href="paginaWeb/index.html#team" target="_blank">Talento Humano</a>
           <a class="nav-link fs-5" href="paginaWeb/index.html#contacts" target="_blank">Contactos</a>
-          <a class="nav-link active fs-5" href="#"><u>Noticias</u></a>
+          <a class="nav-link active fs-5" href="noticias.php"><u>Noticias</u></a>
         </div>
       </div>
       <div class="position-relative d-none d-lg-block ms-5">
@@ -81,58 +78,82 @@ $actualPub = $pubs[$id];
       </div>
     </div>
   </nav>
-  <div class="row">
-    <div class="offset-2 col-8 my-5">
-      <img class="img-fluid" src="./db/img/1-1674538428.jpg" alt="1-1674538428">
-    </div>
-    <div class="offset-2 col-8">
-      <h1 class="display-5 my-2"><?php echo $actualPub->gettitulo(); ?></h1>
-      <p class="fs-5 my-3"><?php echo $actualPub->getresumen(); ?></p>
-      <hr>
-      <p class="ms-5 ps-5"><strong><?php echo $actualPub->getautor(); ?></strong></p>
-      <?php
-      foreach (preg_split('/(\r\n)+/',$actualPub->getcontenido()) as $key => $value) {
-        echo '<p class="lh-lg">'.$value.'</p>';
-      }
-      
-      echo $actualPub->getytURL(); 
-      print_r($actualPub->getimagen()); 
-    ?>
-      <!-- <p class="lh-lg">Mientras madres, esposas y hermanas buscan a sus familiares detenidos en el marco del Régimen de Excepción vigente desde el mes de marzo, la respuesta estatal es ocultar información y, en los últimos días, reprimir y limitar el acceso a alrededores de centros penales dónde las familias llegan con la esperanza de saber algo.</p>
-      <p class="lh-lg">Como en otras crisis, la que se vive en actual contexto con las masivas detenciones, tiene rostro de mujer. Ellas son las que llevan sobre sus hombros la responsabilidad de la familia y de buscar a sus parientes detenidos.</p>
-      <p class="lh-lg">En esta investigación de Edilberto Escobar, corresponsal de Radio Victoria y de la Red Informativa de ARPAS, presentamos los casos de tres madres de Cabañas quienes exigen saber ¿dónde están sus hijos?</p> -->
-    </div>
-    <div class="offset-3 col-6">
-      <div class="ratio ratio-16x9">
-        
-        <iframe src="https://www.youtube.com/embed/w_99k7bttzw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="offset-2 col-8 my-5">
+        <?php
+          $arrImg = $actualPub->getimagen();
+          $bannImg0 = $arrImg[0] == "**No Imagen**" ? "generic.jpg" : $arrImg[0];
+          if($arrImg[1] == "**No Imagen**")
+            echo '<img class="img-fluid" src="'.imgDir.$bannImg0.'" alt="'.$bannImg0.'">';
+          else{
+            echo '<div id="carousel'.$actualPub->getid().'" class="carousel slide" data-bs-ride="carousel">';
+            echo '  <div class="carousel-inner">';
+            foreach($arrImg as $k => $v){
+              echo $k==0?'    <div class="carousel-item active" data-bs-interval="7000">':'    <div class="carousel-item" data-bs-interval="7000">';
+              echo '      <img src="'.imgDir.$v.'" class="d-block w-100" alt="'.$v.'">';
+              echo '    </div>';
+            }
+            echo '  <button class="carousel-control-prev" type="button" data-bs-target="#carousel'.$actualPub->getid().'" data-bs-slide="prev">';
+            echo '    <span class="carousel-control-prev-icon" aria-hidden="true"></span>';
+            echo '    <span class="visually-hidden">Previous</span>';
+            echo '  </button>';
+            echo '  <button class="carousel-control-next" type="button" data-bs-target="#carousel'.$actualPub->getid().'" data-bs-slide="next">';
+            echo '    <span class="carousel-control-next-icon" aria-hidden="true"></span>';
+            echo '    <span class="visually-hidden">Next</span>';
+            echo '  </button>';
+            echo '</div>';
+          }
+        ?>
+        <!-- <img class="img-fluid" .src1imgDir-1674538428.jpg" alt="1-1674538428"> -->
       </div>
-    </div>
-    <div class="offset-1 col-10">
-      <div class="container">
-        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top bg-secondary bg-gradient">
-          <div class="col-md-4 d-flex align-items-center">
-            <a href="https://radioguazapa.org" class="mb-3 mb-md-0 ms-3 me-2 text-white lh-1 text-decoration-none">
-              Radio Guazapa
-            </a>
-            <span class="mb-3 mb-md-0 text-white">&copy; 2023</span>
-          </div>
-      
-          <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-            <li class="ms-3"><a class="text-white" href="#https://www.facebook.com/radioguazapa" target="_blank">
-              <i class="bi bi-facebook"></i>
-            </a></li>
-            <li class="ms-3"><a class="text-white" href="https://twitter.com/radioguazapa" target="_blank">
-              <i class="bi bi-twitter"></i>
-            </a></li>
-            <li class="ms-3"><a class="text-white" href="https://wa.me/50373624088" target="_blank">
-              <i class="bi bi-whatsapp"></i>
-            </a></li>
-            <li class="mx-3"><a class="text-white" href="https://www.instagram.com/radioguazapa" target="_blank">
-              <i class="bi bi-instagram"></i>
-            </a></li>
-          </ul>
-        </footer>
+      <div class="offset-2 col-8">
+        <h1 class="display-5 my-2"><?php echo $actualPub->gettitulo(); ?></h1>
+        <p class="fs-5 my-3"><?php echo $actualPub->getresumen(); ?></p>
+        <hr>
+        <p class="ms-5 ps-5"><strong>Por: <?php echo $actualPub->getautor(); ?></strong></p>
+        <?php
+        foreach (preg_split('/(\r\n)+/',$actualPub->getcontenido()) as $key => $value) {
+          echo '<p class="lh-lg">'.$value.'</p>';
+        }
+      ?>
+        <!-- <p class="lh-lg">Mientras madres, esposas y hermanas buscan a sus familiares detenidos en el marco del Régimen de Excepción vigente desde el mes de marzo, la respuesta estatal es ocultar información y, en los últimos días, reprimir y limitar el acceso a alrededores de centros penales dónde las familias llegan con la esperanza de saber algo.</p>
+        <p class="lh-lg">Como en otras crisis, la que se vive en actual contexto con las masivas detenciones, tiene rostro de mujer. Ellas son las que llevan sobre sus hombros la responsabilidad de la familia y de buscar a sus parientes detenidos.</p>
+        <p class="lh-lg">En esta investigación de Edilberto Escobar, corresponsal de Radio Victoria y de la Red Informativa de ARPAS, presentamos los casos de tres madres de Cabañas quienes exigen saber ¿dónde están sus hijos?</p> -->
+      </div>
+        <?php
+          if($actualPub->getytURL() != ""){
+            //https://youtu.be/
+            echo '<div class="offset-3 col-6 my-3"><div class="ratio ratio-16x9">';
+            $url = preg_replace("/https:\/\/youtu.be\//",'',$actualPub->getytURL());
+            // var_dump($url);
+            echo '<iframe src="https://www.youtube.com/embed/'.$url.'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+            echo '</div></div>';
+          }
+        ?>
+      <div class="offset-1 col-10">
+        <div class="container">
+          <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top bg-secondary bg-gradient">
+            <div class="col-md-4 d-flex align-items-center">
+              <a href="https://radioguazapa.org" class="mb-3 mb-md-0 ms-3 me-2 text-white lh-1 text-decoration-none">Radio Guazapa</a>
+              <span class="mb-3 mb-md-0 text-white">&copy; 2023</span>
+            </div>
+            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+              <li class="ms-3"><a class="text-white" href="#https://www.facebook.com/radioguazapa" target="_blank">
+                <i class="bi bi-facebook"></i>
+              </a></li>
+              <li class="ms-3"><a class="text-white" href="https://twitter.com/radioguazapa" target="_blank">
+                <i class="bi bi-twitter"></i>
+              </a></li>
+              <li class="ms-3"><a class="text-white" href="https://wa.me/50373624088" target="_blank">
+                <i class="bi bi-whatsapp"></i>
+              </a></li>
+              <li class="mx-3"><a class="text-white" href="https://www.instagram.com/radioguazapa" target="_blank">
+                <i class="bi bi-instagram"></i>
+              </a></li>
+            </ul>
+          </footer>
+        </div>
       </div>
     </div>
   </div>
