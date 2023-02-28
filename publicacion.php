@@ -17,7 +17,7 @@ else{
 }
 
 $actualPub = $pubs[$id];
-// var_dump(preg_split('/(\r\n)+/',$actualPub->getcontenido()));
+var_dump(preg_split('/(\r\n)+/',$actualPub->getcontenido()));
 // print_r($actualPub->getcontenido());
 ?>
 
@@ -113,13 +113,21 @@ $actualPub = $pubs[$id];
         <hr>
         <p class="ms-5 ps-5"><strong>Por: <?php echo $actualPub->getautor(); ?></strong></p>
         <?php
+        // var_dump($actualPub->getaudios());
         foreach (preg_split('/(\r\n)+/',$actualPub->getcontenido()) as $key => $value) {
-          echo '<p class="lh-lg">'.$value.'</p>';
+          if(preg_match("/#a\d#/",$value)){
+            $num = [];
+            preg_match_all("/\d+/",$value,$num);
+            // var_dump($num[0][0]-1);
+            echo '<audio controls id="'.$actualPub->getaudios()[($num[0][0]-1)].'">
+            <source src="'.audioDir.$actualPub->getaudios()[($num[0][0]-1)].'">
+          El navegador no soporta los elementos de audio.
+          </audio>';
+          }
+          else
+            echo '<p class="lh-lg">'.$value."</p>\n";
         }
       ?>
-        <!-- <p class="lh-lg">Mientras madres, esposas y hermanas buscan a sus familiares detenidos en el marco del Régimen de Excepción vigente desde el mes de marzo, la respuesta estatal es ocultar información y, en los últimos días, reprimir y limitar el acceso a alrededores de centros penales dónde las familias llegan con la esperanza de saber algo.</p>
-        <p class="lh-lg">Como en otras crisis, la que se vive en actual contexto con las masivas detenciones, tiene rostro de mujer. Ellas son las que llevan sobre sus hombros la responsabilidad de la familia y de buscar a sus parientes detenidos.</p>
-        <p class="lh-lg">En esta investigación de Edilberto Escobar, corresponsal de Radio Victoria y de la Red Informativa de ARPAS, presentamos los casos de tres madres de Cabañas quienes exigen saber ¿dónde están sus hijos?</p> -->
       </div>
         <?php
           if($actualPub->getytURL() != ""){

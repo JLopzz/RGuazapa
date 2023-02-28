@@ -1,6 +1,7 @@
 <?php
 CONST MainUrl = 'https://www.radioguazapa.org/';
 CONST imgDir = 'res/img/';
+CONST audioDir = 'res/audio/';
 CONST jsonDir = 'res/json/db.json';
 // CONST MainUrl = 'http://localhost/git/RGuazapa/';
 // CONST jsonDir = 'db/json/test.json';
@@ -14,6 +15,7 @@ class Publicacion{
   private $resumen;
   private $autor;
   private $ytURL;
+  private $audios;
 
   public function __construct() {
     $get_arguments       = func_get_args();
@@ -23,12 +25,13 @@ class Publicacion{
 }
 
 public function __construct0() {
-  $this->id='0';
-  $this->titulo='Sin Publicaciones';
-  $this->imagen=['',''];
-  $this->contenido='';
-  $this->fecha='';
-  $this->resumen='';
+  $this->id = '0';
+  $this->titulo = 'Sin Publicaciones';
+  $this->imagen = ['**No Imagen**','**No Imagen**'];
+  $this->contenido = '';
+  $this->fecha = '';
+  $this->resumen = '';
+  $this->audios = ['**No Audio**'];
   return true;
 }
 
@@ -42,9 +45,10 @@ public function __construct1($json) {
   $this->resumen=$arr->resumen;
   $this->autor=$arr->autor;
   $this->ytURL=$arr->ytURL;
+  $this->audios=$arr->audios;
   return true;
 }
-  public function __construct8($id='',$titulo = '',$imagen = ['',''],$fecha,$contenido = '',$resumen='',$autor='',$ytURL){
+  public function __construct8($id='',$titulo = '',$imagen = ['**No Imagen**','**No Imagen**'],$fecha,$contenido = '',$resumen='',$autor='',$ytURL,$audios=['**No Audio**']){
     $this->id=$id;
     $this->titulo=$titulo;
     $this->imagen=$imagen;
@@ -53,6 +57,7 @@ public function __construct1($json) {
     $this->resumen=$resumen;
     $this->autor=$autor;
     $this->ytURL=$ytURL;
+    $this->audios=$audios;
     return true;
   }
   /** Setters */
@@ -76,6 +81,9 @@ public function __construct1($json) {
   }
   public function setytURL($ytURL){
     $this->ytURL = $ytURL;
+  }
+  public function setaudios($audios){
+    $this->audios = $audios;
   }
 
   /** Getters */
@@ -102,6 +110,9 @@ public function __construct1($json) {
   }
   public function getytURL(){
     return $this->ytURL;
+  }
+  public function getaudios(){
+    return $this->audios;
   }
   
   /**Conversion en varios formatos */
